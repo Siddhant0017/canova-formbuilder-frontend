@@ -1,0 +1,153 @@
+/* Reuse FormBuilder styles for consistency */
+.form-builder-page {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Flowchart specific styles */
+.flowchart-content {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.flowchart-container {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 30px;
+  min-height: 500px;
+}
+
+.flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flowchart-node {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 200px;
+  margin: 10px 0;
+  text-align: center;
+  position: relative;
+}
+
+.source-node {
+  border-left: 4px solid #4285f4;
+}
+
+.target-node {
+  border-left: 4px solid #34a853;
+}
+
+.default-node {
+  border-left: 4px solid #fbbc05;
+}
+
+.node-content h3 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+}
+
+.node-content p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.flowchart-logic {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.flowchart-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.flowchart-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  height: 60px;
+}
+
+.line-path {
+  width: 2px;
+  height: 100%;
+  background-color: #ccc;
+  position: relative;
+}
+
+.line-path::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  transform: rotate(45deg);
+  bottom: -5px;
+  left: -4px;
+}
+
+.condition-label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #f0f4ff;
+  border: 1px solid #d0d9ff;
+  border-radius: 16px;
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.condition-text {
+  color: #4285f4;
+  font-weight: 500;
+}
+
+.default-line .condition-label {
+  background-color: #fff8e1;
+  border-color: #ffe082;
+}
+
+.default-line .condition-text {
+  color: #f57c00;
+}
+
+.default-branch {
+  margin-top: 20px;
+  border-top: 1px dashed #ccc;
+  padding-top: 20px;
+}
+
+.no-logic-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  color: #666;
+}
+
+.no-logic-message p {
+  margin: 5px 0;
+}
+
+.empty-flowchart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: #666;
+  font-style: italic;
+}

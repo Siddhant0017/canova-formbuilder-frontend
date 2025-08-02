@@ -1,0 +1,631 @@
+/* Dashboard Layout */
+.dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #fafaf9;
+  overflow: hidden; /* Prevent body scroll */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 256px;
+  background-color: #f8f8f8;
+  border-right: 1px solid rgba(179, 179, 179, 0.2);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  padding: 24px;
+  border-bottom: 1px solid rgba(179, 179, 179, 0.2);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #151515;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-shape {
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.logo-text {
+  font-weight: 500;
+  color: #696969;
+  font-size: 18px;
+}
+
+/* Navigation */
+.sidebar-nav {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.nav-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: #696969;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.nav-button:hover {
+  background-color: #f8f8f8;
+}
+
+.nav-button.active {
+  background-color: #bfdaf5;
+  color: #151515;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(179, 179, 179, 0.2);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  margin-left: 256px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Content Container */
+.content-container {
+  box-sizing: border-box;
+  width: 100%;
+  
+  min-height: 100vh;
+  background: #FEFDFD;
+  border: 2px solid #000000;
+  border-radius: 16px;
+  padding: 48px;
+  position: relative;
+  overflow-y: auto;
+}
+
+/* Header */
+.dashboard-title {
+  font-size: 36px;
+  font-weight: normal;
+  color: #151515;
+  margin: 0 0 48px 0;
+}
+
+/* Action Cards */
+.action-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.action-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(179, 179, 179, 0.2);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.action-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-icon {
+  width: 64px;
+  height: 64px;
+  background-color: #69b5f8;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px auto;
+}
+
+.action-icon svg {
+  width: 32px;
+  height: 32px;
+  color: white;
+  stroke-width: 2;
+}
+
+.action-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #151515;
+  margin: 0 0 8px 0;
+}
+
+.action-description {
+  color: #696969;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #151515;
+  margin: 0 0 24px 0;
+}
+
+/* Works Grid */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.work-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(179, 179, 179, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.work-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.work-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.work-title {
+  font-weight: 500;
+  color: #151515;
+  margin: 0;
+  font-size: 16px;
+  flex: 1;
+}
+
+.work-menu-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: #696969;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  position: absolute;
+  top: 180px;
+  right: 18px;
+}
+
+.work-menu-btn:hover {
+  background-color: #f8f8f8;
+}
+
+.menu-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.work-icon {
+  width: 64px;
+  height: 64px;
+  background-color: #69b5f8;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.work-icon svg {
+  width: 32px;
+  height: 32px;
+  color: white;
+  stroke-width: 2;
+}
+
+.analysis-link {
+  background: none;
+  border: none;
+  color: #69b5f8;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.analysis-link:hover {
+  color: rgba(105, 181, 248, 0.8);
+  text-decoration: underline;
+}
+
+/* Loading State */
+.dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fafaf9;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #69b5f8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .works-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .main-content {
+    margin-left: 200px;
+  }
+
+  .content-container {
+    padding: 24px 16px;
+  }
+
+  .dashboard-title {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+
+  .action-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .works-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .dashboard-section {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex: 1;
+    padding: 0 16px;
+  }
+
+  .sidebar-footer {
+    padding: 0;
+    border-top: none;
+    border-left: 1px solid rgba(179, 179, 179, 0.2);
+  }
+
+  .nav-button {
+    flex: 1;
+    justify-content: center;
+    padding: 8px;
+  }
+
+  .nav-icon {
+    margin-right: 0;
+  }
+
+  .nav-button span {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+    margin-top: 64px; /* Offset for sidebar height */
+  }
+
+  .content-container {
+    width: 100%;
+    min-height: calc(100vh - 64px); /* Adjust for sidebar height */
+    margin: 0;
+  }
+}
+
+/* Focus States */
+.nav-button:focus,
+.work-menu-btn:focus,
+.analysis-link:focus {
+  outline: 2px solid #69b5f8;
+  outline-offset: 2px;
+}
+
+.action-card:focus {
+  outline: 2px solid #69b5f8;
+  outline-offset: 2px;
+}
+
+/* Shared Works Styles */
+.shared-work-card {
+  border-left: 3px solid #69b5f8;
+  position: relative;
+}
+
+.shared-work-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.permission-badge {
+  display: flex;
+  align-items: center;
+}
+
+.permission-label {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.permission-label.view {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.permission-label.edit {
+  background-color: #dcfce7;
+  color: #69b5f8;
+}
+
+.permission-label.share {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.shared-work-icon {
+  background-color: #69b5f8;
+}
+
+.shared-info {
+  margin-bottom: 12px;
+}
+
+.shared-by {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Empty Works Styling */
+.empty-works {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 48px 24px;
+  background-color: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  background-color: #e5e7eb;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+}
+
+.empty-icon svg {
+  width: 40px;
+  height: 40px;
+  color: #9ca3af;
+  stroke-width: 2;
+}
+
+.empty-works h3 {
+  font-size: 18px;
+  color: #374151;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.empty-works p {
+  color: #6b7280;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Responsive adjustments for shared works */
+@media (max-width: 768px) {
+  .permission-label {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  .shared-by {
+    font-size: 12px;
+  }
+}
+
+/* Project Card - Modern Folder Design */
+.work-card.project-card {
+  width: 256px;
+  height: 192px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-card.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Blue header section with folder icon */
+.project-card .work-icon {
+  height: 128px;
+  width: 100%;
+  background-color: #69b5f8;
+  border-radius: 0;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card .work-icon svg {
+  width: 48px;
+  height: 48px;
+  color: white;
+  stroke-width: 2;
+}
+
+/* White content section */
+.project-card .work-header {
+  height: 64px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+.project-card .work-title {
+  color: #000000;
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0;
+  flex: 1;
+}
+
+.project-card .work-menu-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #000000;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.project-card .work-menu-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.project-card .work-menu-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+/* Hide the analysis-link button for project cards */
+.project-card .analysis-link {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .work-card.project-card {
+    width: 100%;
+    max-width: 256px;
+  }
+}
+
+/* Keep form cards with original styling */
+.work-card:not(.project-card) {
+  /* Original form card styles remain unchanged */
+}

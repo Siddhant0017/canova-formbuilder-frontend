@@ -1,0 +1,336 @@
+/* PublishModal.css */
+.publish-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.publish-modal-content {
+  width: 100%;
+  max-width: 448px; /* sm:max-w-md */
+  background-color: #fff;
+  border-radius: 16px; /* rounded-2xl */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
+  padding: 0;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-left-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 2px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.close-button {
+  height: 32px;
+  width: 32px;
+  border-radius: 9999px; /* rounded-full */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.x-icon,
+.package-icon {
+  width: 20px;
+  height: 20px;
+  color: #000;
+}
+
+.modal-body {
+  padding: 24px;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.body-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.body-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.section-content {
+  background-color: #e7eef5;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+}
+
+/* Project Selector specific styles */
+.project-selector-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background-color: #e7eef5;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+
+.project-select-dropdown {
+  flex-grow: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f9fafb;
+}
+
+/* Responders Section - Visibility Options */
+.visibility-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #e7eef5;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+  /* Basic styling for radio button */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #69b5f8;
+  background-color: #fff;
+  outline: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.radio-label input[type="radio"]:checked {
+  background-color: #69b5f8;
+  border-color: #69b5f8;
+}
+
+/* Share Panel */
+.share-panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #fff;
+}
+
+.owner-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.owner-status {
+  font-size: 0.85em;
+  color: #6b7280;
+}
+
+.copy-link-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #f3f4f6;
+  color: #333;
+  border: 1px solid #ccc;
+}
+.copy-link-button:hover {
+    background-color: #e0e0e0;
+}
+.copy-link-button .copy-icon {
+    width: 16px;
+    height: 16px;
+}
+
+
+.shared-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.shared-user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-weight: 400;
+}
+
+.permission-dropdown-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.permission-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #f3f4f6;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 24px 6px 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #333;
+}
+
+.permission-select:focus {
+  outline: none;
+  border-color: #69b5f8;
+  box-shadow: 0 0 0 2px rgba(105, 181, 248, 0.25);
+}
+
+.permission-dropdown-container .chevron-down-icon {
+  position: absolute;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  pointer-events: none; /* Allows clicks to pass through to the select */
+  color: #6b7280;
+}
+
+.add-user-section {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.add-email-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.add-email-input:focus {
+  outline: none;
+  border-color: #69b5f8;
+  box-shadow: 0 0 0 2px rgba(105, 181, 248, 0.25);
+}
+
+.add-email-button {
+  background-color: #69b5f8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.add-email-button:hover:not(:disabled) {
+  background-color: #5ba3f0;
+}
+.add-email-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+.add-email-button .plus-icon {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* General Button Styles (like link-button and publish-button) */
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  height: auto;
+  font-weight: 500;
+  cursor: pointer;
+  color: #69b5f8;
+  transition: color 0.2s ease-in-out;
+}
+.link-button:hover {
+  color: #5ba3f0;
+}
+
+.publish-button {
+  width: 100%;
+  background-color: #69b5f8;
+  color: #fff;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.publish-button:hover:not(:disabled) {
+  background-color: #5ba3f0;
+}
+.publish-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

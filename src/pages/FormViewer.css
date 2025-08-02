@@ -1,0 +1,140 @@
+/* FormViewer.css */
+
+/* General Page Layout */
+.form-viewer-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.form-viewer-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Main Form Container */
+.form-viewer-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+/* Form Header */
+.form-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.form-description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Questions and Sections */
+.questions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.question-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+}
+
+.question-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Form Inputs */
+.answer-input, 
+.answer-textarea,
+.dropdown-select,
+.date-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.answer-textarea {
+    resize: vertical;
+}
+
+/* Checkbox and Radio Button Styles */
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #444;
+}
+
+.option-input {
+    width: 16px;
+    height: 16px;
+}
+
+/* Navigation Buttons */
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.prev-btn, .next-btn, .submit-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.prev-btn {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.next-btn, .submit-btn {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.next-btn:hover, .submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Section Separator */
+.section-break-container {
+    width: 100%;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 20px 0;
+}

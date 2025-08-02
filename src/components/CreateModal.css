@@ -1,0 +1,258 @@
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+/* Modal Container */
+.create-project-modal {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Close Button */
+.modal-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background-color: #f7fafc;
+}
+
+.modal-close-btn svg {
+  width: 24px;
+  height: 24px;
+  color: #000000;
+  stroke-width: 2;
+}
+
+/* Modal Content */
+.create-form {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Icon */
+.modal-icon {
+  margin-bottom: 32px;
+}
+
+.icon-container {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #000000;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.icon-container svg {
+  width: 32px;
+  height: 32px;
+  color: #000000;
+  stroke-width: 2;
+}
+
+/* Header */
+.modal-header {
+  margin-bottom: 32px;
+}
+
+.modal-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #000000;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.modal-subtitle {
+  color: #000000;
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Form Fields */
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-label {
+  color: #000000;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.field-input,
+.field-textarea {
+  background: #e7eef5;
+  border: none;
+  border-radius: 16px;
+  padding: 16px 24px;
+  font-size: 18px;
+  color: #000000;
+  transition: all 0.2s ease;
+  resize: vertical;
+}
+
+.field-input:focus,
+.field-textarea:focus {
+  outline: none;
+  background: #d6e3f0;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.field-input::placeholder,
+.field-textarea::placeholder {
+  color: #718096;
+}
+
+.field-textarea {
+  min-height: 80px;
+  font-family: inherit;
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.cancel-btn,
+.create-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  min-width: 120px;
+}
+
+.cancel-btn {
+  background: #f7fafc;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: #edf2f7;
+  border-color: #cbd5e0;
+}
+
+.create-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.create-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.create-btn:disabled,
+.cancel-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .create-project-modal {
+    margin: 10px;
+    max-width: calc(100vw - 20px);
+    border-radius: 16px;
+  }
+  
+  .create-form {
+    padding: 24px;
+  }
+  
+  .modal-title {
+    font-size: 24px;
+  }
+  
+  .modal-subtitle {
+    font-size: 16px;
+  }
+  
+  .field-label {
+    font-size: 16px;
+  }
+  
+  .field-input,
+  .field-textarea {
+    font-size: 16px;
+    padding: 12px 16px;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+  
+  .cancel-btn,
+  .create-btn {
+    width: 100%;
+  }
+}
+
+/* Focus States */
+.modal-close-btn:focus,
+.field-input:focus,
+.field-textarea:focus,
+.cancel-btn:focus,
+.create-btn:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}

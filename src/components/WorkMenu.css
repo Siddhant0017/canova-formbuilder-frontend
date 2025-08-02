@@ -1,0 +1,51 @@
+/* src/components/WorkMenu.css */
+.work-menu {
+    /* Your provided CSS properties */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 15px;
+    gap: 10px;
+    
+    position: absolute;
+    width: 89px;
+    height: 162px;
+    
+    background: #FFFFFF;
+    box-shadow: 4px 8px 32px rgba(0, 0, 0, 0.24);
+    border-radius: 12px;
+    
+    /* Additional properties needed for functionality */
+    list-style: none;
+    margin: 0;
+    z-index: 50;
+    
+    /* Positioning relative to parent card */
+    top: 32px;
+    right: 8px;
+  }
+  
+  .work-menu li {
+    font-size: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.12s;
+    border-radius: 6px;
+    text-align: center;
+    width: 100%;
+    font-weight: 500;
+  }
+  
+  .work-menu li:hover {
+    background: #f8f8f8;
+  }
+  
+  .work-menu .danger {
+    color: #d10000;
+  }
+  
+  .work-menu .danger:hover {
+    background: #fef2f2;
+  }
+  

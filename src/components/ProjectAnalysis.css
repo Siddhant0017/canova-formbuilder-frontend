@@ -1,0 +1,579 @@
+/* Project Analysis Page - Using Dashboard Styles */
+.project-analysis-page {
+    display: flex;
+    height: 100vh;
+    background-color: #fafaf9;
+  }
+  
+  /* Use all Dashboard sidebar styles */
+  .sidebar {
+    width: 256px;
+    background-color: #f8f8f8;
+    border-right: 1px solid rgba(179, 179, 179, 0.2);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-header {
+    padding: 24px;
+    border-bottom: 1px solid rgba(179, 179, 179, 0.2);
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logo-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #151515;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo-shape {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 4px;
+  }
+  
+  .logo-text {
+    font-weight: 500;
+    color: #696969;
+    font-size: 18px;
+  }
+  
+  .sidebar-nav {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  
+  .nav-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    color: #696969;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+  }
+  
+  .nav-button:hover {
+    background-color: #f8f8f8;
+  }
+  
+  .nav-button.active {
+    background-color: #bfdaf5;
+    color: #151515;
+  }
+  
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+  }
+  
+  .sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid rgba(179, 179, 179, 0.2);
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .content-container {
+    padding: 32px;
+  }
+  
+  /* Header - NO SAVE BUTTON */
+  .project-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(179, 179, 179, 0.2);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    color: #696969;
+  }
+  
+  .back-button:hover {
+    background-color: #f8f8f8;
+    color: #151515;
+  }
+  
+  .back-icon {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+  }
+  
+  .header-title {
+    font-size: 28px;
+    font-weight: 500;
+    color: #151515;
+    margin: 0;
+  }
+  
+  /* Metrics and Charts - Same as Analytics */
+  .metrics-chart-row {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+  
+  .metrics-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 300px;
+  }
+  
+  .metric-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(179, 179, 179, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .metric-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .metric-label {
+    font-size: 14px;
+    color: #696969;
+    margin: 0;
+  }
+  
+  .metric-value-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .metric-value {
+    font-size: 32px;
+    font-weight: 500;
+    color: #151515;
+  }
+  
+  .metric-growth {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .metric-growth.positive {
+    color: #10b981;
+  }
+  
+  .metric-growth.negative {
+    color: #ef4444;
+  }
+  
+  .growth-icon {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+  }
+  
+  /* Chart Container */
+  .chart-container {
+    flex: 1;
+  }
+  
+  .chart-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(179, 179, 179, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chart-content {
+    padding: 24px;
+  }
+  
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .chart-tabs {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .chart-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #151515;
+    margin: 0;
+  }
+  
+  .tab-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .tab-button {
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #696969;
+    transition: all 0.2s ease;
+  }
+  
+  .tab-button.active {
+    background-color: #69b5f8;
+    color: white;
+  }
+  
+  .time-period-selector {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .period-button {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #696969;
+    transition: color 0.2s ease;
+  }
+  
+  .period-button.active {
+    color: #151515;
+  }
+  
+  .period-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #d1d5db;
+    transition: background-color 0.2s ease;
+  }
+  
+  .period-dot.active {
+    background-color: #69b5f8;
+  }
+  
+  /* Chart Area */
+  .chart-area {
+    position: relative;
+  }
+  
+  .chart-svg {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .axis-label {
+    font-size: 12px;
+    color: #696969;
+  }
+  
+  .x-axis-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 0 40px;
+    font-size: 12px;
+    color: #696969;
+  }
+  
+  /* Dashboard Sections */
+  .dashboard-section {
+    margin-bottom: 48px;
+  }
+  
+  .section-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #151515;
+    margin: 0 0 24px 0;
+  }
+  
+  /* Works Grid */
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  
+  .work-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(179, 179, 179, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .work-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .project-form-card {
+    border-left: 3px solid #8b5cf6;
+  }
+  
+  .work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  
+  .work-title {
+    font-weight: 500;
+    color: #151515;
+    margin: 0;
+    font-size: 16px;
+    flex: 1;
+  }
+  
+  .analytics-badge {
+    display: flex;
+    align-items: center;
+  }
+  
+  .view-count {
+    font-size: 12px;
+    padding: 4px 8px;
+    background-color: #f3f4f6;
+    color: #374151;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+  
+  .work-icon {
+    width: 64px;
+    height: 64px;
+    background-color: #69b5f8;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  
+  .work-icon svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+    stroke-width: 2;
+  }
+  
+  .analysis-link {
+    background: none;
+    border: none;
+    color: #69b5f8;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .analysis-link:hover {
+    color: rgba(105, 181, 248, 0.8);
+    text-decoration: underline;
+  }
+  
+  /* Empty Works */
+  .empty-works {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 48px 24px;
+    background-color: #f9fafb;
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+  }
+  
+  .empty-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #e5e7eb;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px auto;
+  }
+  
+  .empty-icon svg {
+    width: 40px;
+    height: 40px;
+    color: #9ca3af;
+    stroke-width: 2;
+  }
+  
+  .empty-works h3 {
+    font-size: 18px;
+    color: #374151;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+  }
+  
+  .empty-works p {
+    color: #6b7280;
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  /* Loading State */
+  .project-analysis-loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fafaf9;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #69b5f8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .metrics-chart-row {
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .works-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+    }
+    
+    .content-container {
+      padding: 24px 16px;
+    }
+    
+    .project-header {
+      padding: 16px 24px;
+    }
+    
+    .header-title {
+      font-size: 24px;
+    }
+    
+    .works-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .dashboard-section {
+      margin-bottom: 32px;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .project-analysis-page {
+      flex-direction: column;
+    }
+    
+    .sidebar {
+      width: 100%;
+      height: auto;
+      flex-direction: row;
+      padding: 16px;
+    }
+    
+    .sidebar-nav {
+      flex-direction: row;
+      flex: 1;
+      padding: 0 16px;
+    }
+    
+    .sidebar-footer {
+      padding: 0;
+      border-top: none;
+      border-left: 1px solid rgba(179, 179, 179, 0.2);
+    }
+    
+    .nav-button {
+      flex: 1;
+      justify-content: center;
+      padding: 8px;
+    }
+    
+    .project-header {
+      padding: 16px;
+    }
+    
+    .header-left {
+      gap: 12px;
+    }
+    
+    .header-title {
+      font-size: 20px;
+    }
+  }
+  
