@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import api from '../services/api';
 import "./FormAnalysis.css";
 
-// DonutChart Component - Updated to match senior's design
 const DonutChart = ({ data, questionTitle }) => {
   const chartData = data.options || [];
   const total = chartData.reduce((sum, item) => sum + item.count, 0);
@@ -78,7 +77,6 @@ const DonutChart = ({ data, questionTitle }) => {
   );
 };
 
-// BarChart Component - Updated to match senior's design
 const BarChart = ({ data, questionTitle }) => {
   const chartData = data.options || [];
   const total = chartData.reduce((sum, item) => sum + item.count, 0);

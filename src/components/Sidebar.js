@@ -22,22 +22,22 @@ const Sidebar = () => {
 
       <nav className="sidebar-nav">
         <NavLink to="/dashboard" className="nav-item">
-          <span className="nav-icon">🏠</span>
+          <span className="nav-icon"></span>
           <span className="nav-text">Home</span>
         </NavLink>
         
         <NavLink to="/templates" className="nav-item">
-          <span className="nav-icon">📄</span>
+          <span className="nav-icon"></span>
           <span className="nav-text">Templates</span>
         </NavLink>
         
         <NavLink to="/analytics" className="nav-item">
-          <span className="nav-icon">📊</span>
+          <span className="nav-icon"></span>
           <span className="nav-text">Analytics</span>
         </NavLink>
         
         <NavLink to="/projects" className="nav-item">
-          <span className="nav-icon">📁</span>
+          <span className="nav-icon"></span>
           <span className="nav-text">Projects</span>
         </NavLink>
       </nav>

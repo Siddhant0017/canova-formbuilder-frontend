@@ -15,12 +15,10 @@ const ConditionalLogicModal = ({
     conditionalLogic?.falseRedirect || ''
   );
 
-  // Filter out current page from dropdown options
   const availablePages = pages.filter(page => page.id !== currentPageId);
 
   const handleSave = () => {
     if (!trueRedirect && !falseRedirect) {
-      // If no redirects selected, remove conditional logic
       onUpdate({
         conditionalLogic: null
       });
@@ -30,7 +28,7 @@ const ConditionalLogicModal = ({
           enabled: true,
           trueRedirect,
           falseRedirect,
-          logic: 'AND' // All correct answers must match
+          logic: 'AND'
         }
       });
     }
@@ -86,7 +84,7 @@ const ConditionalLogicModal = ({
         <div className="modal-content">
           <div className="logic-explanation">
             <div className="info-box">
-              <h4>🧠 How Conditional Logic Works</h4>
+              <h4>How Conditional Logic Works</h4>
               <p>Based on the correct answers you've set for questions on this page:</p>
               <ul>
                 <li><strong>All correct:</strong> User gets all answers right → True path</li>
@@ -139,8 +137,8 @@ const ConditionalLogicModal = ({
             {conditionalLogic?.enabled && (
               <div className="status-info">
                 <h4>Current Logic:</h4>
-                <p>✅ True → {pages.find(p => p.id === trueRedirect)?.name || 'Not set'}</p>
-                <p>❌ False → {pages.find(p => p.id === falseRedirect)?.name || 'Not set'}</p>
+                <p> True → {pages.find(p => p.id === trueRedirect)?.name || 'Not set'}</p>
+                <p>False → {pages.find(p => p.id === falseRedirect)?.name || 'Not set'}</p>
               </div>
             )}
           </div>

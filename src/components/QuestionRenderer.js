@@ -30,12 +30,12 @@ const QuestionRenderer = ({ question, value, onChange }) => {
       return;
     }
 
-    // Convert FileList to array of file objects
+  
     const fileData = fileArray.map(file => ({
       name: file.name,
       size: file.size,
       type: file.type,
-      file: file // Store actual file for submission
+      file: file 
     }));
 
     handleInputChange(fileData);

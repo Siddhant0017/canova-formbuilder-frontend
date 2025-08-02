@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../services/api';
-import QuestionRenderer from '../components/QuestionRenderer'; // <-- Import the new component
+import QuestionRenderer from '../components/QuestionRenderer';
 import './FormPreview.css';
 
 const FormPreview = () => {
@@ -80,21 +80,82 @@ const FormPreview = () => {
                 <h1 className="form-title">{form.title}</h1>
                 <p className="form-description">{form.description}</p>
                 <form onSubmit={handleSubmit}>
-                    <div className="questions-list">
-                        {questionElements.map(questionId => {
-                            const question = form.questions.find(q => q.id === questionId);
-                            if (!question) return null;
-                            return (
-                                <QuestionRenderer
-                                    key={question.id}
-                                    question={question}
-                                    value={responses[question.id]}
-                                    onChange={(value) => handleInputChange(question.id, value)}
-                                    readOnly={true} // Preview is read-only for the owner
-                                />
-                            );
-                        })}
+                <div className="questions-list">
+    {(() => {
+        // Get current page elements (including section breaks)
+        const currentPageElements = form.pages[currentPageIndex]?.layout || questionElements;
+        
+        // Process sections from layout
+        const sections = [];
+        let currentSection = { id: 'default', color: '#ffffff', questions: [] };
+        
+        currentPageElements.forEach(item => {
+            if (typeof item === 'string') {
+                // It's a question ID
+                const question = form.questions.find(q => q.id === item);
+                if (question) {
+                    currentSection.questions.push(question);
+                }
+            } else if (item.type === 'section-break') {
+                // Save current section if it has questions
+                if (currentSection.questions.length > 0) {
+                    sections.push(currentSection);
+                }
+                // Start new section
+                currentSection = { 
+                    id: item.id, 
+                    color: item.color || '#ffffff', 
+                    questions: [] 
+                };
+            }
+        });
+        
+        // Add the last section
+        if (currentSection.questions.length > 0) {
+            sections.push(currentSection);
+        }
+        
+        // If no sections were created, create one default section with all questions
+        if (sections.length === 0) {
+            const allQuestions = questionElements.map(id => form.questions.find(q => q.id === id)).filter(Boolean);
+            sections.push({ id: 'default', color: '#ffffff', questions: allQuestions });
+        }
+        
+        // Render sections
+        return sections.map((section, sectionIndex) => (
+            <div 
+                key={section.id} 
+                className="preview-section"
+                style={{ 
+                    backgroundColor: section.color,
+                    padding: '24px',
+                    borderRadius: '12px',
+                    marginBottom: '16px',
+                    border: '1px solid #e5e7eb'
+                }}
+            >
+                {/* Optional: Section label for preview clarity */}
+                {sections.length > 1 && (
+                    <div className="preview-section-label">
+                        Section {sectionIndex + 1}
                     </div>
+                )}
+                
+                {section.questions.map(question => (
+                    <div key={question.id} className="preview-question-in-section">
+                        <QuestionRenderer
+                            question={question}
+                            value={responses[question.id]}
+                            onChange={(value) => handleInputChange(question.id, value)}
+                            readOnly={true}
+                        />
+                    </div>
+                ))}
+            </div>
+        ));
+    })()}
+</div>
+
                     <div className="form-navigation">
                         {form.pages.length > 1 && currentPageIndex > 0 && (
                             <button type="button" className="prev-btn" onClick={handlePrevPage}>Previous</button>

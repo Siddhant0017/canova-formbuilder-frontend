@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import WorkMenu from "../components/WorkMenu"; // Add this import
+import WorkMenu from "../components/WorkMenu"; 
 import api from '../services/api';
 import { toast } from 'react-toastify';
 import './Projects.css';
@@ -10,7 +10,7 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [activeNav, setActiveNav] = useState('projects');
   const [loading, setLoading] = useState(true);
-  const [openMenu, setOpenMenu] = useState(null); // Changed from showMenuId to openMenu
+  const [openMenu, setOpenMenu] = useState(null);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -57,8 +57,6 @@ const Projects = () => {
     navigate(`/project/${projectId}/forms`);
   };
 
-  // Remove the custom menu handlers since WorkMenu will handle them
-  // Keep only the ones you might want to customize differently
 
   if (loading) {
     return (

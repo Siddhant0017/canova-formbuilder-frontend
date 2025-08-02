@@ -1,17 +1,17 @@
-// src/components/WorkMenu.jsx
+
 import { useEffect, useRef } from "react";
 import api from "../services/api";
 import "./WorkMenu.css";
 
 const WorkMenu = ({
-  type,               // "form" | "project"
-  item,               // the full object { _id, title … } or { _id, name … }
+  type, 
+  item,
   onClose,
-  refresh            // callback to reload dashboard lists
+  refresh
 }) => {
   const ref = useRef(null);
 
-  /* close if you click outside the menu */
+
   useEffect(() => {
     const handler = (e) =>
       ref.current && !ref.current.contains(e.target) && onClose();
@@ -19,7 +19,6 @@ const WorkMenu = ({
     return () => document.removeEventListener("mousedown", handler);
   }, [onClose]);
 
-  /* ------------------ MENU ACTIONS ------------------ */
   const share = async () => {
     try {
       const { data } = await api.get(`/${type}s/${item._id}/share-link`);

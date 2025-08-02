@@ -1,11 +1,11 @@
-// src/pages/Settings.jsx
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { User, Settings as SettingsIcon, ChevronRight, LogOut } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import api from "../services/api";
-import "./Settings.css"; // This is using the profile-style CSS
+import "./Settings.css";
 
 export default function Settings() {
   const [settings, setSettings] = useState({

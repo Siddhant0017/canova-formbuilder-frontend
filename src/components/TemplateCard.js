@@ -4,12 +4,12 @@ import './TemplateCard.css';
 const TemplateCard = ({ template, onUse }) => {
   const getCategoryIcon = (category) => {
     switch (category) {
-      case 'survey': return '📊';
-      case 'feedback': return '💬';
-      case 'registration': return '📝';
-      case 'quiz': return '🧠';
-      case 'contact': return '📞';
-      default: return '📄';
+      case 'survey': return '';
+      case 'feedback': return '';
+      case 'registration': return '';
+      case 'quiz': return '';
+      case 'contact': return '';
+      default: return '';
     }
   };
 

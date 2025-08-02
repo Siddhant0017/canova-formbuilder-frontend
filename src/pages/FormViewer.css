@@ -138,3 +138,27 @@
     background-color: #e0e0e0;
     margin: 20px 0;
 }
+/* Section styling for form viewer */
+.form-section {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.form-section:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.question-in-section {
+    margin-bottom: 20px;
+}
+
+.question-in-section:last-child {
+    margin-bottom: 0;
+}
+
+.question-in-section .question-renderer {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}

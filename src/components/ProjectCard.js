@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../services/api';
-// import './ProjectCard.css';
+
 
 const ProjectCard = ({ project, onUpdate }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -73,10 +73,10 @@ const ProjectCard = ({ project, onUpdate }) => {
         
         <div className="project-stats">
           <span className="stat">
-            📄 {project.forms?.length || 0} forms
+             {project.forms?.length || 0} forms
           </span>
           <span className="stat">
-            👥 {project.collaborators?.length || 0} collaborators
+             {project.collaborators?.length || 0} collaborators
           </span>
         </div>
       </div>

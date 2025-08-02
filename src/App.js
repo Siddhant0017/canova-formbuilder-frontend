@@ -15,7 +15,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import FormBuilder from "./pages/FormBuilder";
 import Analytics from "./pages/Analytics";
-import FormAnalysis from './components/FormAnalysis'; // FIXED: Single import, correct path
+import FormAnalysis from './components/FormAnalysis'; 
 import Projects from "./pages/Projects";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";

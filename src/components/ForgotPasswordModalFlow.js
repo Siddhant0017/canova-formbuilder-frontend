@@ -1,4 +1,4 @@
-// components/ForgotPasswordModalFlow.js
+
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAuth } from '../contexts/AuthContext';
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import './ForgotPasswordModalFlow.css';
 
 const ForgotPasswordModalFlow = ({ isOpen, onClose, userEmail }) => {
-  const [step, setStep] = useState(1); // 1: OTP, 2: New Password
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     otp: "",
     newPassword: "",

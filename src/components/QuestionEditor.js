@@ -52,24 +52,24 @@ const QuestionEditor = ({ question, onUpdate, onDelete, onDuplicate, sectionColo
   const handleOptionKeyDown = (e, optionId, optionIndex) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      // Add a new option below the current one
+      
       const newOption = { id: generateId(), text: "", isCorrect: false };
       const updatedOptions = [...question.options];
       updatedOptions.splice(optionIndex + 1, 0, newOption);
       
       onUpdate({ options: updatedOptions });
       
-      // Focus will be set to the new option in useEffect
+      
       setLastAddedOptionIndex(optionIndex + 1);
     } else if (e.key === 'Backspace' && e.target.value === '') {
       e.preventDefault();
-      // Remove the current option if it's empty
+      
       if (question.options.length > 1) {
         const updatedOptions = question.options.filter((_, idx) => idx !== optionIndex);
         
         onUpdate({ options: updatedOptions });
         
-        // Focus the previous option
+       
         setLastAddedOptionIndex(optionIndex > 0 ? optionIndex - 1 : null);
       }
     }
@@ -78,7 +78,7 @@ const QuestionEditor = ({ question, onUpdate, onDelete, onDuplicate, sectionColo
   const handleQuestionKeyDown = (e) => {
     if (e.key === 'Backspace' && e.target.value === '' && !question.title) {
       e.preventDefault();
-      // Remove the question if title is empty
+   
       onDelete();
     }
   };
@@ -103,10 +103,10 @@ const QuestionEditor = ({ question, onUpdate, onDelete, onDuplicate, sectionColo
             ✓ Set Correct Answer
           </button>
           <button className="duplicate-btn" onClick={onDuplicate}>
-            📋
+            
           </button>
           <button className="delete-btn" onClick={onDelete}>
-            🗑️
+            
           </button>
         </div>
       </div>

@@ -5,8 +5,7 @@ import './CreateModal.css';
 const CreateModal = ({ onClose, onCreateProject }) => {
     const [projectData, setProjectData] = useState({
         name: '',
-        formName: '',
-        description: ''
+        formName: ''
     });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -19,26 +18,22 @@ const CreateModal = ({ onClose, onCreateProject }) => {
 
         setLoading(true);
         try {
-            // onCreateProject returns an object like { id: projectId, formId: newFormId }
             const result = await onCreateProject({
                 name: projectData.name,
                 formName: projectData.formName,
-                description: projectData.description
+                description: '' // Empty description
             });
 
-            // FIX: Use the formId returned from onCreateProject for navigation
-            // This ensures you navigate to the specific URL of the newly created form
             navigate(`/form-builder/${result.formId}`, {
                 state: {
-                    projectId: result.id, // This is the project ID
+                    projectId: result.id,
                     formTitle: projectData.formName
                 }
             });
 
-            onClose(); // Close the modal after successful navigation
+            onClose();
         } catch (error) {
             console.error('Failed to create project:', error);
-            // You might want to add a toast.error here as well
         } finally {
             setLoading(false);
         }
@@ -62,14 +57,15 @@ const CreateModal = ({ onClose, onCreateProject }) => {
                     <div className="modal-icon">
                         <div className="icon-container">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                <path d="M9 12l2 2 4-4"/>
                             </svg>
                         </div>
                     </div>
 
                     {/* Title and subtitle */}
                     <div className="modal-header">
-                        <h1 className="modal-title">Create Project</h1>
+                        <h2 className="modal-title">Create Project</h2>
                         <p className="modal-subtitle">
                             Provide your project a name and start with your journey
                         </p>
@@ -84,7 +80,7 @@ const CreateModal = ({ onClose, onCreateProject }) => {
                                 className="field-input"
                                 value={projectData.name}
                                 onChange={(e) => setProjectData(prev => ({ ...prev, name: e.target.value }))}
-                                placeholder="Enter project name"
+                                placeholder="Project Name"
                                 required
                             />
                         </div>
@@ -96,41 +92,20 @@ const CreateModal = ({ onClose, onCreateProject }) => {
                                 className="field-input"
                                 value={projectData.formName}
                                 onChange={(e) => setProjectData(prev => ({ ...prev, formName: e.target.value }))}
-                                placeholder="Enter initial form name"
+                                placeholder="Form Name"
                                 required
                             />
                         </div>
-
-                        <div className="form-field">
-                            <label className="field-label">Description (Optional)</label>
-                            <textarea
-                                className="field-textarea"
-                                value={projectData.description}
-                                onChange={(e) => setProjectData(prev => ({ ...prev, description: e.target.value }))}
-                                placeholder="Describe your project..."
-                                rows={3}
-                            />
-                        </div>
                     </div>
 
-                    {/* Action Buttons */}
-                    <div className="modal-actions">
-                        <button
-                            type="button"
-                            className="cancel-btn"
-                            onClick={onClose}
-                            disabled={loading}
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="submit"
-                            className="create-btn"
-                            disabled={!isValid || loading}
-                        >
-                            {loading ? 'Creating...' : 'Create Project'}
-                        </button>
-                    </div>
+                    {/* Single Create Button */}
+                    <button
+                        type="submit"
+                        className="create-btn-primary"
+                        disabled={!isValid || loading}
+                    >
+                        {loading ? 'Creating...' : 'Create'}
+                    </button>
                 </form>
             </div>
         </div>

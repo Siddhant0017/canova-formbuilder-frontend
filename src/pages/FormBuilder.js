@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useAuth } from '../contexts/AuthContext';
 import DesignPanel from "../components/DesignPanel";
 import ConditionalLogicModal from "../components/ConditionalLogicModal";
-import QuestionRenderer from "../components/QuestionRenderer"; // Adjust path as needed
+import QuestionRenderer from "../components/QuestionRenderer";
 import api from "../services/api";
 import { generateId } from "../utils/helpers";
 import "./FormBuilder.css";
@@ -46,7 +46,7 @@ const FormBuilder = () => {
     const [isConditionSelectionMode, setIsConditionSelectionMode] = useState(false);
     const [selectedConditions, setSelectedConditions] = useState([]);
 
-    // NEW: Check for project parameter on component mount
+   
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const projectId = urlParams.get('project');
@@ -93,15 +93,15 @@ const FormBuilder = () => {
         }
     };
 
-    // UPDATED: Include project in form data
+    
     const saveFormBeforeNavigation = async () => {
         try {
             setSaving(true);
             
-            // Include project in form data
+           
             const formDataWithProject = {
                 ...form,
-                project: selectedProjectId // CRITICAL: Include project ID
+                project: selectedProjectId 
             };
 
             if (formId && formId !== "new") {
@@ -121,20 +121,20 @@ const FormBuilder = () => {
         }
     };
 
-    // UPDATED: Navigate back to project if project context exists
+   
     const handleSave = async () => {
         try {
             await saveFormBeforeNavigation();
             toast.success("Form saved successfully!");
             
-            // IMPORTANT: If project context, redirect back to project forms
+          
             if (selectedProjectId) {
                 navigate(`/project/${selectedProjectId}/forms`);
             } else {
                 navigate("/dashboard");
             }
         } catch (error) {
-            // Error already handled in saveFormBeforeNavigation
+            
         }
     };
 
@@ -381,11 +381,11 @@ const FormBuilder = () => {
             setCurrentPageForCondition(currentPage);
             setShowConditionalModal(true);
         } catch (error) {
-            // Error already handled
+           
         }
     };
 
-    // UPDATED: Include project context in publish flow
+
     const handlePublish = async () => {
         if (form.questions.length === 0) {
             toast.error("Add at least one question before publishing");
@@ -416,26 +416,53 @@ const FormBuilder = () => {
             };
             navigate(`/form-preview/${savedFormId}`, { state: { form: formToPass }, replace: false });
         } catch (error) {
-            // Error already handled
+            
         }
     };
 
     const currentPageElements = form.pages
         .find(page => page.id === currentPage)?.layout || [];
     
-    // Logic to group questions into sections for rendering
-    const sectionsToRender = [];
-    let currentSection = { id: 'default-section', color: '#DDDDDD', elements: [] };
+
+    // UPDATED SECTION RENDERING LOGIC:
+const sectionsToRender = [];
+let currentSection = { id: 'default-section', color: '#DDDDDD', elements: [] };
+
+// First, collect all section breaks
+const sectionBreaks = currentPageElements.filter(item => item.type === 'section-break');
+
+// If no section breaks, create one default section with all questions
+if (sectionBreaks.length === 0) {
+    currentSection.elements = currentPageElements.filter(item => typeof item === 'string');
+    sectionsToRender.push(currentSection);
+} else {
+    // Group elements by sections
+    let sectionIndex = 0;
+    let currentSectionBreak = sectionBreaks[sectionIndex];
     
     currentPageElements.forEach(item => {
         if (typeof item === 'string') {
+            // It's a question ID
             currentSection.elements.push(item);
         } else if (item.type === 'section-break') {
-            sectionsToRender.push(currentSection);
-            currentSection = { id: item.id, color: item.color || '#DDDDDD', elements: [] };
+            // It's a section break
+            if (currentSection.elements.length > 0 || sectionsToRender.length === 0) {
+                sectionsToRender.push(currentSection);
+            }
+            // Start new section
+            currentSection = { 
+                id: item.id, 
+                color: item.color || '#6bd4c6', 
+                elements: [] 
+            };
+            sectionIndex++;
         }
     });
+    
+    // Add the last section
     sectionsToRender.push(currentSection);
+}
+
 
     const getQuestionTypeLabel = (type) => {
         const typeMap = {
@@ -493,77 +520,95 @@ const FormBuilder = () => {
                             </div>
                         ) : (
                             <div className="questions-list">
-                                {sectionsToRender.map((section, sectionIndex) => (
-                                    <div key={section.id} className="section-container" style={{ borderColor: section.color }}>
-                                        {/* Color Picker for Section */}
-                                        <div className="section-header-controls">
-                                            <span className="section-header-label">Section</span>
-                                            <input
-                                                type="color"
-                                                value={section.color || '#DDDDDD'}
-                                                onChange={(e) => updateSection(section.id, { color: e.target.value })}
-                                                className="section-color-picker"
-                                                disabled={isConditionSelectionMode}
-                                            />
-                                        </div>
-                                        {section.elements.map((item, index) => {
-                                            if (typeof item === 'string') { // It's a question ID
-                                                const question = form.questions.find(q => q.id === item);
-                                                if (!question) return null; // Question not found, skip rendering
-                                                return (
-                                                    <div key={item} className="question-container">
-                                                        {/* Question Header */}
-                                                        <div className="question-header">
-                                                            <div className="question-info">
-                                                                <span className="question-number">Q{index + 1}</span>
-                                                                <input
-                                                                    type="text"
-                                                                    value={question.title}
-                                                                    onChange={(e) => updateQuestion(question.id, { title: e.target.value })}
-                                                                    className="question-title-input"
-                                                                    placeholder="Question title"
-                                                                    disabled={isConditionSelectionMode}
-                                                                />
-                                                            </div>
-                                                            <div className="question-type-selector">
-                                                                <div className="question-type-display">
-                                                                    <svg className="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                                        <polyline points="6,9 12,15 18,9" />
-                                                                    </svg>
-                                                                    <span className="type-label">{getQuestionTypeLabel(question.type)}</span>
-                                                                </div>
-                                                                <select
-                                                                    value={question.type}
-                                                                    onChange={(e) => updateQuestionType(question.id, e.target.value)}
-                                                                    className="type-select"
-                                                                    disabled={isConditionSelectionMode}
-                                                                >
-                                                                    <option value="text">Short Answer</option>
-                                                                    <option value="textarea">Long Answer</option>
-                                                                    <option value="multiple-choice">Multiple Choice</option>
-                                                                    <option value="checkbox">Checkbox</option>
-                                                                    <option value="dropdown">Dropdown</option>
-                                                                    <option value="date">Date</option>
-                                                                    <option value="linear-scale">Linear Scale</option>
-                                                                    <option value="rating">Rating</option>
-                                                                    <option value="file-upload">File Upload</option>
-                                                                    <option value="image">Image</option>
-                                                                    <option value="video">Video</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        {/* Question Answer Area */}
-                                                        <div className="question-answer">
-                                                            {renderQuestionAnswerBox(question)}
-                                                        </div>
-                                                    </div>
-                                                );
-                                            }
-                                            return null;
-                                        })}
+                            {sectionsToRender.map((section, sectionIndex) => (
+                                <div 
+                                    key={section.id} 
+                                    className="section-container" 
+                                    style={{ 
+                                        backgroundColor: section.color || '#6bd4c6',
+                                        padding: '24px',
+                                        borderRadius: '12px',
+                                        marginBottom: '16px'
+                                    }}
+                                >
+                                    {/* Section Header Controls */}
+                                    <div className="section-header-controls">
+                                        <span className="section-header-label">Section {sectionIndex + 1}</span>
+                                        <input
+                                            type="color"
+                                            value={section.color || '#6bd4c6'}
+                                            onChange={(e) => updateSection(section.id, { color: e.target.value })}
+                                            className="section-color-picker"
+                                            disabled={isConditionSelectionMode}
+                                        />
                                     </div>
-                                ))}
-                            </div>
+                                    
+                                    {/* Questions in this section */}
+                                    {section.elements.map((questionId, questionIndex) => {
+                                        const question = form.questions.find(q => q.id === questionId);
+                                        if (!question) return null;
+                                        
+                                        return (
+                                            <div key={questionId} className="question-in-section">
+                                                {/* Question Header */}
+                                                <div className="question-header">
+                                                    <div className="question-info">
+                                                        <span className="question-number">Q{questionIndex + 1}</span>
+                                                        <input
+                                                            type="text"
+                                                            value={question.title}
+                                                            onChange={(e) => updateQuestion(question.id, { title: e.target.value })}
+                                                            className="question-title-input"
+                                                            placeholder="Question title"
+                                                            disabled={isConditionSelectionMode}
+                                                        />
+                                                    </div>
+                                                    <div className="question-type-selector">
+                                                        <div className="question-type-display">
+                                                            <svg className="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                <polyline points="6,9 12,15 18,9" />
+                                                            </svg>
+                                                            <span className="type-label">{getQuestionTypeLabel(question.type)}</span>
+                                                        </div>
+                                                        <select
+                                                            value={question.type}
+                                                            onChange={(e) => updateQuestionType(question.id, e.target.value)}
+                                                            className="type-select"
+                                                            disabled={isConditionSelectionMode}
+                                                        >
+                                                            <option value="text">Short Answer</option>
+                                                            <option value="textarea">Long Answer</option>
+                                                            <option value="multiple-choice">Multiple Choice</option>
+                                                            <option value="checkbox">Checkbox</option>
+                                                            <option value="dropdown">Dropdown</option>
+                                                            <option value="date">Date</option>
+                                                            <option value="linear-scale">Linear Scale</option>
+                                                            <option value="rating">Rating</option>
+                                                            <option value="file-upload">File Upload</option>
+                                                            <option value="image">Image</option>
+                                                            <option value="video">Video</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                                {/* Question Answer Area */}
+                                                <div className="question-answer">
+                                                    {renderQuestionAnswerBox(question)}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                    
+                                    {/* Show message if section is empty */}
+                                    {section.elements.length === 0 && (
+                                        <div className="empty-section">
+                                            <span>Add questions to this section</span>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        
                         )}
                         {isConditionSelectionMode && (<div className="bottom-add-condition"><button className="bottom-condition-btn" disabled={selectedConditions.length === 0} onClick={handleBottomAddCondition}>Add Condition ({selectedConditions.length} selected)</button></div>)}
                     </div>

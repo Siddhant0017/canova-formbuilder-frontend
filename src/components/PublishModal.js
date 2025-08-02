@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import api from '../services/api';
 import './PublishModal.css';
 
-// Recreated icons in JSX for easy use
 const PackageIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="package-icon"> <path d="m7.5 4.275-5 2.875c-.2.125-.4.325-.5.55-.1.225-.1.475 0 .7.1.225.3.425.5.55l5 2.875c.2.125.4.325.5.55.1.225.1.475 0 .7-.1.225-.3.425-.5.55l-5 2.875c-.2.125-.4.325-.5.55-.1.225-.1.475 0 .7.1.225.3.425.5.55l5 2.875c.2.125.4.325.5.55.1.225.1.475 0 .7-.1.225-.3.425-.5.55l-5 2.875c-.2.125-.4.325-.5.55-.1.225-.1.475 0 .7.1.225.3.425.5.55l5 2.875" /><path d="M12 2v20" /><path d="m16.5 4.275l5 2.875c.2.125.4.325.5.55.1.225.1.475 0 .7-.1.225-.3.425-.5.55l-5 2.875c-.2.125-.4.325-.5.55-.1.225-.1.475 0 .7.1.225.3.425.5.55l5 2.875" /> </svg>
 );

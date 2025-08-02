@@ -1,4 +1,4 @@
-// components/ForgotPassword.js
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import './ForgotPassword.css';
 
 const ForgotPassword = () => {
-  const [step, setStep] = useState(1); // 1: email, 2: otp modal, 3: password modal
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     email: '',
     otp: '',

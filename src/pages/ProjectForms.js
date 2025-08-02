@@ -1,4 +1,4 @@
-// pages/ProjectForms.js
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -18,12 +18,11 @@ const ProjectForms = () => {
   useEffect(() => {
     fetchProjectForms();
   }, [projectId]);
-// In ProjectForms.js - Add focus event listener to refresh forms
 
 useEffect(() => {
   fetchProjectForms();
   
-  // Refresh forms when user returns to this page
+
   const handleFocus = () => {
     console.log('Page focused, refreshing forms...');
     fetchProjectForms();
@@ -49,12 +48,11 @@ useEffect(() => {
     try {
       setLoading(true);
       
-      // Fetch project details
+    
       const projectRes = await api.get(`/projects/${projectId}`);
       setProject(projectRes.data.project);
       
-      // FIXED: Better way to fetch forms for a project
-      // Option 1: If you have a dedicated endpoint for project forms
+     
       try {
         const formsRes = await api.get(`/projects/${projectId}/forms`);
         setForms(formsRes.data.forms || []);
@@ -111,12 +109,11 @@ useEffect(() => {
     navigate('/projects');
   };
 
-  // Navigate to form builder with project context
+ 
   const handleCreateForm = () => {
     navigate(`/form-builder/new?project=${projectId}`);
   };
 
-  // Navigate to form analytics
   const handleFormAnalytics = (formId) => {
     navigate(`/analytics/form/${formId}`);
   };
@@ -135,7 +132,7 @@ useEffect(() => {
     );
   }
 
-  // Handle case where project is not found
+ 
   if (!project) {
     return (
       <div className="project-forms-error">

@@ -1,4 +1,4 @@
-// src/pages/SubmissionSuccess.js (Updated)
+
 import React from 'react';
 import './SubmissionSuccess.css'; 
 

@@ -9,7 +9,7 @@ const FormBuilderHeader = ({
   saving, 
   onTitleChange, 
   onShowDesign,
-  onShowConditionalLogic // Added new prop
+  onShowConditionalLogic
 }) => {
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const FormBuilderHeader = ({
             placeholder="Form Title"
           />
           <span className="form-status">
-            {form.status === 'draft' ? '📝 Draft' : '✅ Published'}
+            {form.status === 'draft' ? ' Draft' : ' Published'}
           </span>
         </div>
       </div>
@@ -41,26 +41,26 @@ const FormBuilderHeader = ({
           className="design-btn"
           onClick={onShowDesign}
         >
-          🎨 Design
+          Design
         </button>
         <button 
           className="conditional-btn"
           onClick={onShowConditionalLogic}
         >
-          🔗 Logic
+          Logic
         </button>
         <button 
           className="save-btn"
           onClick={onSave}
           disabled={saving}
         >
-          {saving ? 'Saving...' : '💾 Save'}
+          {saving ? 'Saving...' : ' Save'}
         </button>
         <button 
           className="publish-btn"
           onClick={onPublish}
         >
-          🚀 Publish
+          Publish
         </button>
       </div>
     </div>

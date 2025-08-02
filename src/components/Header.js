@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
-// import './Header.css';
 
 const Header = () => {
   const { user } = useAuth();

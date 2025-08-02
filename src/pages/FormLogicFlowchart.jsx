@@ -8,7 +8,7 @@ import api from "../services/api";
 import "./FormLogicFlowchart.css";
 
 export default function FormLogicFlowchart() {
-    const { id } = useParams(); // Correctly called at the top level
+    const { id } = useParams(); 
     const location = useLocation();
     const navigate = useNavigate();
     const { user } = useAuth();
@@ -25,7 +25,7 @@ export default function FormLogicFlowchart() {
     const redirectTimeoutRef = useRef(null);
     const redirectInitiated = useRef(false);
 
-    // useEffect for fetching projects (correctly placed)
+ 
     useEffect(() => {
         const fetchProjects = async () => {
             try {
@@ -203,7 +203,7 @@ export default function FormLogicFlowchart() {
                             >
                                 <span>{page.name}</span>
                                 {page.conditionalLogic && page.conditionalLogic.conditions && page.conditionalLogic.conditions.length > 0 && (
-                                    <span className="condition-indicator">⚡</span>
+                                    <span className="condition-indicator">:</span>
                                 )}
                             </div>
                         ))}

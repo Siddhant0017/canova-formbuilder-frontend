@@ -23,7 +23,7 @@ const Templates = () => {
     { value: 'contact', label: 'Contact' }
   ];
 
-  // Sample templates - in real app, fetch from API
+
   const sampleTemplates = [
     {
       _id: 'template1',

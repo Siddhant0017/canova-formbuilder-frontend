@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../services/api';
-// import './FormCard.css';
 
 const FormCard = ({ form, onUpdate }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -53,7 +52,7 @@ const FormCard = ({ form, onUpdate }) => {
     <div className="form-card">
       <div className="form-header">
         <div className={`form-status ${form.status}`}>
-          {form.status === 'draft' ? '📝' : '✅'}
+          {form.status === 'draft' ? '' : ''}
         </div>
         <div className="form-actions">
           <button
@@ -88,7 +87,7 @@ const FormCard = ({ form, onUpdate }) => {
           </span>
           {form.project && (
             <span className="stat">
-              📁 {form.project.name}
+              {form.project.name}
             </span>
           )}
         </div>

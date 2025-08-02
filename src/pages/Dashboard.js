@@ -17,7 +17,7 @@ const Dashboard = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [activeNav, setActiveNav] = useState('home');
   const [loading, setLoading] = useState(true);
-  const [openMenu, setOpenMenu] = useState(null); // { id, type, item } or null
+  const [openMenu, setOpenMenu] = useState(null);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 

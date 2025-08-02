@@ -31,7 +31,7 @@ const SharedForms = ({ forms, onUpdate }) => {
   };
 
   const getCurrentUserId = () => {
-    // Get current user ID from auth context or local storage
+   
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user.id;
   };
@@ -40,10 +40,10 @@ const SharedForms = ({ forms, onUpdate }) => {
     const accessLevel = getAccessLevel(form);
     
     if (accessLevel === 'edit') {
-      // Navigate to form builder for editing
+      
       navigate(`/form-builder/${form._id}`);
     } else {
-      // Navigate to form viewer for viewing only
+     
       navigate(`/form/${form._id}`);
     }
   };
@@ -93,13 +93,13 @@ const SharedForms = ({ forms, onUpdate }) => {
   };
 
   if (!forms || forms.length === 0) {
-    return null; // Don't render section if no shared forms
+    return null; 
   }
 
   return (
     <section className="shared-forms">
       <div className="section-header">
-        <h2>📤 Shared with You</h2>
+        <h2> Shared with You</h2>
         <span className="shared-count">{forms.length} forms</span>
       </div>
 
@@ -173,7 +173,7 @@ const SharedForms = ({ forms, onUpdate }) => {
                     
                     {form.project && (
                       <span className="stat">
-                        📁 {form.project.name}
+                        {form.project.name}
                       </span>
                     )}
                   </div>
@@ -213,7 +213,7 @@ const SharedForms = ({ forms, onUpdate }) => {
                       <div className="detail-row">
                         <span className="detail-label">Visibility:</span>
                         <span className="detail-value">
-                          {form.visibility === 'public' ? '🌐 Public' : '🔒 Restricted'}
+                          {form.visibility === 'public' ? ' Public' : ' Restricted'}
                         </span>
                       </div>
                     </div>

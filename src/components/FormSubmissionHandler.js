@@ -7,10 +7,8 @@ const FormSubmissionHandler = ({ form, formData, onSubmit }) => {
     e.preventDefault();
     
     try {
-      // Submit form data
       await onSubmit(formData);
       
-      // Evaluate conditional logic for redirection
       const redirectUrl = evaluateConditions(
         formData, 
         form.conditionalLogic, 
@@ -18,7 +16,6 @@ const FormSubmissionHandler = ({ form, formData, onSubmit }) => {
       );
       
       if (redirectUrl) {
-        // Show success message before redirect
         setTimeout(() => {
           window.location.href = redirectUrl;
         }, 1000);

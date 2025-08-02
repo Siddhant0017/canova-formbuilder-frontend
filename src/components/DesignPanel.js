@@ -1,5 +1,4 @@
 import React from 'react';
-// import './DesignPanel.css';
 
 const DesignPanel = ({ design, onUpdate, onClose }) => {
   const colorPresets = [

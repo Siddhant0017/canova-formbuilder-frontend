@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import WorkMenu from "../components/WorkMenu"; // Add this import
+import WorkMenu from "../components/WorkMenu";
 import api from '../services/api';
 import { toast } from 'react-toastify';
 import './Analytics.css';
@@ -12,7 +12,7 @@ const Analytics = () => {
   const [projects, setProjects] = useState([]);
   const [sharedWorks, setSharedWorks] = useState({ sharedWithMe: [] });
   const [loading, setLoading] = useState(true);
-  const [openMenu, setOpenMenu] = useState(null); // Add this state for WorkMenu
+  const [openMenu, setOpenMenu] = useState(null);
   const navigate = useNavigate();
   const { user } = useAuth();
 

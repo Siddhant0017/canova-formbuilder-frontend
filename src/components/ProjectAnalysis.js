@@ -1,4 +1,4 @@
-// pages/ProjectAnalysis.js
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -71,7 +71,7 @@ export default function ProjectAnalysis() {
     navigate('/analytics');
   };
 
-  // Navigate to individual form analytics when clicking on a form
+ 
   const handleFormClick = (formId) => {
     navigate(`/analytics/form/${formId}`);
   };

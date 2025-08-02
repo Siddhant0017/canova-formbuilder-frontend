@@ -1,6 +1,6 @@
-// contexts/AuthContext.js
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import api from '../services/api';                 // axios instance with baseURL '/api'
+import api from '../services/api';      
 
 const AuthContext = createContext({});
 
@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [user,    setUser]    = useState(null);
   const [loading, setLoading] = useState(true);
 
-  /* ───────────  LOAD USER FROM STORAGE  ─────────── */
+ 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     const data  = localStorage.getItem('user');
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  /* ───────────  AUTH ENDPOINTS  ─────────── */
+ 
   const login = async (email, password) => {
     try {
       const { data } = await api.post('/auth/login', { email, password });
@@ -53,8 +53,8 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  /* ───────────  PASSWORD-RECOVERY FLOW  ─────────── */
-  // 1. request OTP
+  
+
   const forgotPassword = async (email) => {
     try {
       const { data } = await api.post('/password/forgot-password', { email });
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // 2 + 3. verify OTP then reset password
+
   const resetPassword = async (email, otp, newPassword) => {
     try {
       // verify-OTP
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  /* ───────────  CONTEXT VALUE  ─────────── */
+
   const value = {
     user,
     loading,
