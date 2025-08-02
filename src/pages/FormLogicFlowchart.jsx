@@ -15,7 +15,6 @@ export default function FormLogicFlowchart() {
 
     const [form, setForm] = useState(null);
     const [isLoadingForm, setIsLoadingForm] = useState(true);
-
     const [selectedPageId, setSelectedPageId] = useState(null);
     const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -25,7 +24,7 @@ export default function FormLogicFlowchart() {
     const redirectTimeoutRef = useRef(null);
     const redirectInitiated = useRef(false);
 
- 
+    // Your existing useEffect hooks remain exactly the same...
     useEffect(() => {
         const fetchProjects = async () => {
             try {
@@ -42,15 +41,12 @@ export default function FormLogicFlowchart() {
         fetchProjects();
     }, []);
 
-    // useEffect for fetching form data based on URL ID (correctly placed)
     useEffect(() => {
-        // Clear any pending redirect timeout if this effect re-runs
         if (redirectTimeoutRef.current) {
             clearTimeout(redirectTimeoutRef.current);
             redirectTimeoutRef.current = null;
         }
 
-        // If a redirect has already been initiated, don't run this effect's logic again
         if (redirectInitiated.current) {
             return;
         }
@@ -62,7 +58,7 @@ export default function FormLogicFlowchart() {
                     const response = await api.get(`/forms/${id}`);
                     const fetchedForm = {
                         ...response.data.form,
-                        id: id, // Ensure id is explicitly set from useParams
+                        id: id,
                         pages: response.data.form.pages.map(page => ({
                             ...page,
                             conditionalLogic: page.conditionalLogic || { conditions: [], passRedirect: null, failRedirect: null }
@@ -85,14 +81,13 @@ export default function FormLogicFlowchart() {
             };
             fetchFormData();
         } else {
-            // ID is undefined. Schedule a potential redirect, but allow a small window for it to appear.
             redirectTimeoutRef.current = setTimeout(() => {
                 if (!id && !redirectInitiated.current) {
                     redirectInitiated.current = true;
                     toast.error("No form ID provided in the URL.");
                     navigate("/dashboard");
                 }
-            }, 100); // 100ms delay to allow React Router to catch up
+            }, 100);
 
             return () => {
                 if (redirectTimeoutRef.current) {
@@ -100,12 +95,13 @@ export default function FormLogicFlowchart() {
                 }
             };
         }
-    }, [id, navigate]); // Rerun if ID changes
+    }, [id, navigate]);
 
     const pages = form?.pages || [];
     const selectedPage = pages.find(p => p.id === selectedPageId);
     const pageConditionalLogic = selectedPage?.conditionalLogic || { conditions: [], passRedirect: null, failRedirect: null };
 
+    // Your existing handler functions remain exactly the same...
     const handleSaveAndPreview = () => {
         if (form) {
             navigate(`/form-preview/${form.id || "new"}`, { state: { form } });
@@ -185,7 +181,8 @@ export default function FormLogicFlowchart() {
     }
 
     return (
-        <div className="form-builder-page">
+        <div className="flowchart-page">
+            {/* ✅ KEEPING YOUR ORIGINAL SIDEBAR - NO CHANGES */}
             <div className="form-builder-sidebar">
                 <div className="sidebar-content">
                     <div className="sidebar-logo">
@@ -203,7 +200,7 @@ export default function FormLogicFlowchart() {
                             >
                                 <span>{page.name}</span>
                                 {page.conditionalLogic && page.conditionalLogic.conditions && page.conditionalLogic.conditions.length > 0 && (
-                                    <span className="condition-indicator">:</span>
+                                    <span className="condition-indicator">⚡</span>
                                 )}
                             </div>
                         ))}
@@ -219,94 +216,92 @@ export default function FormLogicFlowchart() {
                     </div>
                 </div>
             </div>
-            <div className="form-builder-main">
-                <div className="form-builder-header">
-                    <h1 className="form-title">{form.title} - Logic Flowchart</h1>
-                    <div className="header-actions">
-                        <button className="preview-btn" onClick={handleSaveAndPreview}>
-                            Continue to Preview
-                        </button>
-                        <button className="save-btn" onClick={handleOpenPublishModal} disabled={isLoadingProjects || isLoadingForm || !form?.id}>
-                            Publish
-                        </button>
+
+            {/* Main Content Area - Updated Design */}
+            <main className="flowchart-main">
+                <div className="flowchart-container">
+                    {/* Title Section */}
+                    <div className="flowchart-header">
+                        <h1 className="flowchart-title">{form.title}</h1>
                     </div>
-                </div>
-                <div className="form-content flowchart-content">
-                    <div className="flowchart-container">
-                        <div className="flowchart">
-                            {selectedPage ? (
+
+                    {/* Flowchart Content */}
+                    <div className="flowchart-content">
+                        <div className="flowchart-diagram">
+                            {selectedPage && pageConditionalLogic.conditions.length > 0 ? (
                                 <>
-                                    <div className="flowchart-node source-node">
-                                        <div className="node-content">
-                                            <h3>{selectedPage.name}</h3>
-                                            <p>Source Page</p>
+                                    {/* Top Page */}
+                                    <div className="flowchart-node top-node">
+                                        {selectedPage.name}
+                                        <svg className="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <polyline points="6,9 12,15 18,9"/>
+                                        </svg>
+                                    </div>
+
+                                    {/* Vertical line from Top Page */}
+                                    <div className="vertical-connector"></div>
+
+                                    {/* True/False Branch Container */}
+                                    <div className="branch-container">
+                                        <div className="horizontal-connector"></div>
+                                        <div className="vertical-true"></div>
+                                        <div className="vertical-false"></div>
+
+                                        {/* True Branch */}
+                                        <div className="true-branch">
+                                            <div className="condition-tag true-tag">
+                                                <svg className="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                                </svg>
+                                                True
+                                            </div>
+                                            <div className="branch-connector"></div>
+                                            <div className="flowchart-node result-node">
+                                                {pages.find(p => p.id === pageConditionalLogic.passRedirect)?.name || "Next Page"}
+                                            </div>
+                                        </div>
+
+                                        {/* False Branch */}
+                                        <div className="false-branch">
+                                            <div className="condition-tag false-tag">
+                                                <svg className="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                                </svg>
+                                                False
+                                            </div>
+                                            <div className="branch-connector"></div>
+                                            <div className="flowchart-node result-node">
+                                                {pages.find(p => p.id === pageConditionalLogic.failRedirect)?.name || "End Form"}
+                                            </div>
                                         </div>
                                     </div>
-                                    {pageConditionalLogic.conditions.length > 0 ? (
-                                        <div className="flowchart-logic">
-                                            {pageConditionalLogic.conditions.map((logic, index) => {
-                                                const { question, option } = getQuestionAndOptionDetails(logic.fieldId, logic.value);
-                                                return (
-                                                    <div key={index} className="flowchart-branch">
-                                                        <div className="flowchart-line">
-                                                            <div className="line-path"></div>
-                                                            <div className="condition-label">
-                                                                <span className="condition-text">
-                                                                    If "{question?.title || 'Question'}" is "{option?.text || 'selected'}"
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flowchart-node target-node">
-                                                            <div className="node-content">
-                                                                <h3>{pages.find(p => p.id === pageConditionalLogic.passRedirect)?.name || "N/A"}</h3>
-                                                                <p>Go to this page (Pass)</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                );
-                                            })}
-                                            {pageConditionalLogic.failRedirect && (
-                                                <div className="flowchart-branch default-branch">
-                                                    <div className="flowchart-line default-line">
-                                                        <div className="line-path"></div>
-                                                        <div className="condition-label">
-                                                            <span className="condition-text">If any condition fails</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="flowchart-node target-node default-node">
-                                                        <div className="node-content">
-                                                            <h3>{pages.find(p => p.id === pageConditionalLogic.failRedirect)?.name || "End of Form"}</h3>
-                                                            <p>Go to this page (Fail)</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ) : (
-                                        <div className="no-logic-message">
-                                            <p>No conditional logic set for this page.</p>
-                                            <p>This page will proceed to the next page in sequence.</p>
-                                            <div className="flowchart-line default-line">
-                                                <div className="line-path"></div>
-                                            </div>
-                                            <div className="flowchart-node target-node default-node">
-                                                <div className="node-content">
-                                                    <h3>{pages[pages.findIndex(p => p.id === selectedPageId) + 1]?.name || "End of Form"}</h3>
-                                                    <p>Next sequential page</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
                                 </>
                             ) : (
-                                <div className="no-logic-message">
-                                    <p>Please select a page to view its logic flow.</p>
+                                <div className="no-logic">
+                                    <div className="flowchart-node single-node">
+                                        {selectedPage?.name || "Select a Page"}
+                                    </div>
+                                    <p className="no-logic-text">No conditional logic set for this page</p>
+                                    <p className="no-logic-subtext">Page will proceed to next page in sequence</p>
                                 </div>
                             )}
                         </div>
                     </div>
+
+                    {/* Next Button */}
+                    <div className="flowchart-footer">
+                        <button 
+                            className="next-button"
+                            onClick={handleOpenPublishModal}
+                            disabled={isLoadingProjects || isLoadingForm || !form?.id}
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </main>
+
+            {/* Your existing modals */}
             <PublishModal
                 isOpen={isPublishModalOpen}
                 onClose={handleClosePublishModal}

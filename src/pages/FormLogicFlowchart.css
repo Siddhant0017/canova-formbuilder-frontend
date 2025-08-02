@@ -1,153 +1,461 @@
-/* Reuse FormBuilder styles for consistency */
-.form-builder-page {
+/* Main Layout */
+.flowchart-page {
   display: flex;
   height: 100vh;
-  overflow: hidden;
+  background-color: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
-/* Flowchart specific styles */
-.flowchart-content {
-  padding: 20px;
-  overflow-y: auto;
+/* ✅ ORIGINAL SIDEBAR STYLES - NO CHANGES */
+.form-builder-sidebar {
+  width: 256px;
+  background-color: #e7eef5;
+  border-right: 1px solid rgba(179, 179, 179, 0.2);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.sidebar-content {
+  padding: 16px;
+  flex: 1;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.logo-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #000000;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-shape {
+  width: 12px;
+  height: 12px;
+  border: 1px solid white;
+}
+
+.logo-text {
+  color: #696969;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.pages-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.page-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #12182b;
+  font-size: 14px;
+}
+
+.page-item:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.page-item.active {
+  background-color: rgba(138, 179, 221, 0.2);
+  color: #12182b;
+}
+
+.condition-indicator {
+  font-size: 12px;
+  color: #667eea;
+}
+
+.sidebar-profile {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #696969;
+  font-size: 14px;
+}
+
+.profile-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+/* ✅ NEW FLOWCHART MAIN CONTENT STYLES */
+.flowchart-main {
+  flex: 1;
+  padding: 24px;
+  position: relative;
 }
 
 .flowchart-container {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 30px;
-  min-height: 500px;
-}
-
-.flowchart {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.flowchart-node {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  width: 200px;
-  margin: 10px 0;
-  text-align: center;
-  position: relative;
-}
-
-.source-node {
-  border-left: 4px solid #4285f4;
-}
-
-.target-node {
-  border-left: 4px solid #34a853;
-}
-
-.default-node {
-  border-left: 4px solid #fbbc05;
-}
-
-.node-content h3 {
-  margin: 0 0 5px 0;
-  font-size: 16px;
-}
-
-.node-content p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-.flowchart-logic {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.flowchart-branch {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.flowchart-line {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  position: relative;
-  height: 60px;
-}
-
-.line-path {
-  width: 2px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #b3b3b3;
   height: 100%;
-  background-color: #ccc;
-  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.line-path::before {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid #ccc;
-  border-bottom: 2px solid #ccc;
-  transform: rotate(45deg);
-  bottom: -5px;
-  left: -4px;
+/* Title Section */
+.flowchart-header {
+  padding: 24px;
+  border-bottom: 1px solid #b3b3b3;
 }
 
-.condition-label {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #f0f4ff;
-  border: 1px solid #d0d9ff;
-  border-radius: 16px;
-  padding: 5px 12px;
-  font-size: 12px;
+.flowchart-title {
+  font-size: 30px;
+  font-weight: 400;
+  color: #000000;
+  margin: 0;
 }
 
-.condition-text {
-  color: #4285f4;
-  font-weight: 500;
+/* Flowchart Content */
+.flowchart-content {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.default-line .condition-label {
-  background-color: #fff8e1;
-  border-color: #ffe082;
-}
-
-.default-line .condition-text {
-  color: #f57c00;
-}
-
-.default-branch {
-  margin-top: 20px;
-  border-top: 1px dashed #ccc;
-  padding-top: 20px;
-}
-
-.no-logic-message {
+.flowchart-diagram {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
-  color: #666;
 }
 
-.no-logic-message p {
-  margin: 5px 0;
+/* Flowchart Nodes */
+.flowchart-node {
+  background-color: #e7eef5;
+  color: #000000;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.top-node {
+  /* Top page node styling */
+}
+
+.chevron-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+/* Connectors */
+.vertical-connector {
+  width: 1px;
+  height: 32px;
+  border-left: 1px dashed #b3b3b3;
+  margin: 8px 0;
+}
+
+.branch-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 64px;
+  position: relative;
+}
+
+.horizontal-connector {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 1px;
+  border-top: 1px dashed #b3b3b3;
+}
+
+.vertical-true {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 60px);
+  width: 1px;
+  height: 32px;
+  border-left: 1px dashed #b3b3b3;
+}
+
+.vertical-false {
+  position: absolute;
+  top: 0;
+  left: calc(50% + 60px);
+  width: 1px;
+  height: 32px;
+  border-left: 1px dashed #b3b3b3;
+}
+
+/* Branches */
+.true-branch,
+.false-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 32px;
+}
+
+.condition-tag {
+  background-color: #e7eef5;
+  color: #000000;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tag-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.branch-connector {
+  width: 1px;
+  height: 32px;
+  border-left: 1px dashed #b3b3b3;
+  margin: 8px 0;
+}
+
+.result-node {
+  /* Result page node styling */
+}
+
+/* No Logic State */
+.no-logic {
+  text-align: center;
+}
+
+.single-node {
+  margin-bottom: 16px;
+}
+
+.no-logic-text {
+  color: #696969;
+  margin: 8px 0 0 0;
+  font-size: 14px;
+}
+
+.no-logic-subtext {
+  color: #696969;
+  margin: 4px 0 0 0;
+  font-size: 14px;
+}
+
+/* Next Button */
+.flowchart-footer {
+  padding: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.next-button {
+  background-color: #151515;
+  color: #ffffff;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.next-button:hover:not(:disabled) {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.next-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading and Empty States */
+.form-builder-loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .empty-flowchart {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+  text-align: center;
+  padding: 24px;
+}
+
+.empty-flowchart p {
   color: #666;
-  font-style: italic;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.empty-flowchart button {
+  background-color: #151515;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.empty-flowchart button:hover {
+  background-color: #000000;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .branch-container {
+    gap: 48px;
+  }
+  
+  .horizontal-connector {
+    width: 96px;
+  }
+  
+  .vertical-true {
+    left: calc(50% - 48px);
+  }
+  
+  .vertical-false {
+    left: calc(50% + 48px);
+  }
+}
+
+@media (max-width: 768px) {
+  .flowchart-page {
+    flex-direction: column;
+  }
+  
+  .form-builder-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(179, 179, 179, 0.2);
+  }
+  
+  .sidebar-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+  }
+  
+  .pages-section {
+    flex-direction: row;
+    margin-bottom: 0;
+    gap: 4px;
+  }
+  
+  .page-item {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  
+  .sidebar-profile {
+    position: static;
+    padding: 12px 16px;
+    border-left: 1px solid rgba(179, 179, 179, 0.2);
+  }
+  
+  .flowchart-main {
+    padding: 16px;
+  }
+  
+  .flowchart-header {
+    padding: 16px;
+  }
+  
+  .flowchart-title {
+    font-size: 24px;
+  }
+  
+  .branch-container {
+    gap: 32px;
+  }
+  
+  .horizontal-connector {
+    width: 64px;
+  }
+  
+  .vertical-true {
+    left: calc(50% - 32px);
+  }
+  
+  .vertical-false {
+    left: calc(50% + 32px);
+  }
+  
+  .next-button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
+
+/* Focus States */
+.page-item:focus,
+.next-button:focus {
+  outline: 2px solid #69B5F8;
+  outline-offset: 2px;
 }
