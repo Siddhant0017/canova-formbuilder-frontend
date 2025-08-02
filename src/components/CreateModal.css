@@ -11,7 +11,7 @@
 }
 
 /* Modal Container */
-.create-project-modal {
+.conditional-modal {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -58,65 +58,29 @@
 }
 
 /* Modal Content */
-.create-form {
+.modal-content {
   padding: 24px;
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
-/* Icon */
-.modal-icon {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 24px;
-}
-
-.icon-container {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: #f3f4f6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-container svg {
-  width: 24px;
-  height: 24px;
+/* Modal Description */
+.modal-description {
   color: #000000;
-  stroke-width: 2;
-}
-
-/* Header */
-.modal-header {
-  margin-bottom: 24px;
-}
-
-.modal-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #000000;
-  margin: 0 0 8px 0;
-  line-height: 1.2;
-}
-
-.modal-subtitle {
-  color: #6b7280;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.4;
   margin: 0;
 }
 
-/* Form Fields */
-.form-fields {
+/* Redirect Settings */
+.redirect-settings {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 24px;
 }
 
-.form-field {
+.redirect-field {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -124,80 +88,110 @@
 
 .field-label {
   color: #000000;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 }
 
-.field-input {
+.page-select-input {
   background: #e7eef5;
   border: none;
   border-radius: 8px;
   padding: 12px 16px;
-  font-size: 14px;
+  font-size: 18px;
   color: #000000;
-  transition: all 0.2s ease;
   outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.field-input:focus {
+.page-select-input:focus {
   background: #d6e3f0;
   box-shadow: 0 0 0 2px rgba(105, 181, 248, 0.2);
 }
 
-.field-input::placeholder {
-  color: #6b7280;
+.page-select-input option {
+  background: #ffffff;
+  color: #000000;
+  padding: 8px;
 }
 
-/* Primary Create Button */
-.create-btn-primary {
+/* Continue Button */
+.continue-btn {
   width: 100%;
-  height: 56px;
-  background: #69B5F8;
-  color: white;
+  background: #000000;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
+  padding: 12px 16px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   margin-top: 8px;
 }
 
-.create-btn-primary:hover:not(:disabled) {
-  background: #5a9edb;
+.continue-btn:hover {
+  background: #151515;
   transform: translateY(-1px);
 }
 
-.create-btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
+/* No Pages Message */
+.no-pages-message {
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.warning-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.no-pages-message h3 {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.no-pages-message p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0 0 8px 0;
+}
+
+.no-pages-message p:last-of-type {
+  margin-bottom: 0;
 }
 
 /* Responsive Design */
 @media (max-width: 640px) {
-  .create-project-modal {
+  .conditional-modal {
     margin: 16px;
     max-width: calc(100vw - 32px);
   }
   
-  .create-form {
+  .modal-content {
     padding: 20px;
   }
   
-  .modal-title {
-    font-size: 20px;
+  .modal-description {
+    font-size: 16px;
   }
   
-  .modal-subtitle {
-    font-size: 13px;
+  .field-label {
+    font-size: 14px;
+  }
+  
+  .page-select-input {
+    font-size: 16px;
   }
 }
 
 /* Focus States */
 .modal-close-btn:focus,
-.field-input:focus,
-.create-btn-primary:focus {
+.page-select-input:focus,
+.continue-btn:focus {
   outline: 2px solid #69B5F8;
   outline-offset: 2px;
 }
