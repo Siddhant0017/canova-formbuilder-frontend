@@ -47,34 +47,34 @@ const FormViewer = () => {
     const evaluateConditionalLogic = () => {
         const currentPage = form.pages[currentPageIndex];
         const logicArray = currentPage.conditionalLogic;
-    
+
         console.log("Evaluating logic for page:", currentPage.id);
         console.log("Saved conditionalLogic array:", logicArray);
         console.log(" Collected responses so far:", responses);
-    
+
         if (!Array.isArray(logicArray) || logicArray.length === 0) {
             console.log("⚠️ No conditional logic found. Proceeding to next page.");
             return { result: 'none' };
         }
-    
+
         for (const logic of logicArray) {
             if (!logic.conditions || logic.conditions.length === 0) continue;
-    
+
             const allConditionsMet = logic.conditions.every(condition => {
                 const userAnswer = responses[condition.fieldId];
                 const expectedAnswer = condition.value;
-    
+
                 console.log(" Checking condition:");
                 console.log("   - Field ID:", condition.fieldId);
                 console.log("   - Expected:", expectedAnswer);
                 console.log("   - Actual:", userAnswer);
-    
+
                 if (Array.isArray(userAnswer)) {
                     return userAnswer.includes(expectedAnswer);
                 }
                 return userAnswer === expectedAnswer;
             });
-    
+
             if (allConditionsMet) {
                 console.log(" Conditions matched. Redirect to:", logic.passRedirect);
                 return { result: 'pass', redirectPageId: logic.passRedirect };
@@ -83,17 +83,17 @@ const FormViewer = () => {
                 return { result: 'fail', redirectPageId: logic.failRedirect };
             }
         }
-    
+
         console.log("⚠️ No logic block matched. Proceeding to next page.");
         return { result: 'none' };
     };
-    
-    
+
+
     const handleNextPage = () => {
         console.log("Triggered Next button — evaluating conditional logic...");
         const logicResult = evaluateConditionalLogic();
         console.log(" Logic evaluation result:", logicResult);
-        
+
 
         if (logicResult.result === 'pass' && logicResult.redirectPageId) {
             const nextPageIndex = form.pages.findIndex(p => p.id === logicResult.redirectPageId);
@@ -167,64 +167,60 @@ const FormViewer = () => {
                 <h1 className="form-title">{form.title}</h1>
                 <p className="form-description">{form.description}</p>
                 <form onSubmit={handleSubmit}>
-                <div className="questions-list">
-    {(() => {
-        // Process sections from layout
-        const sections = [];
-        let currentSection = { id: 'default', color: '#ffffff', questions: [] };
-        
-        currentPageElements.forEach(item => {
-            if (typeof item === 'string') {
-                // It's a question ID
-                const question = form.questions.find(q => q.id === item);
-                if (question) {
-                    currentSection.questions.push(question);
-                }
-            } else if (item.type === 'section-break') {
-                // Save current section if it has questions
-                if (currentSection.questions.length > 0) {
-                    sections.push(currentSection);
-                }
-                // Start new section
-                currentSection = { 
-                    id: item.id, 
-                    color: item.color || '#ffffff', 
-                    questions: [] 
-                };
-            }
-        });
-        
-        // Add the last section
-        if (currentSection.questions.length > 0) {
-            sections.push(currentSection);
-        }
-        
-        // Render sections
-        return sections.map((section, sectionIndex) => (
-            <div 
-                key={section.id} 
-                className="form-section"
-                style={{ 
-                    backgroundColor: section.color,
-                    padding: '24px',
-                    borderRadius: '12px',
-                    marginBottom: '16px',
-                    border: '1px solid #e5e7eb'
-                }}
-            >
-                {section.questions.map(question => (
-                    <div key={question.id} className="question-in-section">
-                        <QuestionRenderer
-                            question={question}
-                            value={responses[question.id]}
-                            onChange={(value) => handleInputChange(question.id, value)}
-                        />
+                    <div className="questions-list">
+                        {(() => {
+                            const currentPageElements = form.pages[currentPageIndex].layout || [];
+                            const sections = [];
+                            let currentSection = { color: '#ffffff', questions: [] };
+
+                            currentPageElements.forEach(item => {
+                                if (typeof item === 'string') {
+                                    const question = form.questions.find(q => q.id === item);
+                                    if (question) {
+                                        currentSection.questions.push(question);
+                                    }
+                                } else if (item.type === 'section-break') {
+                                    if (currentSection.questions.length > 0) {
+                                        sections.push(currentSection);
+                                    }
+                                    currentSection = {
+                                        color: item.color || form.design?.sectionColor || '#ffffff',
+                                        questions: []
+                                    };
+                                }
+                            });
+
+                            if (currentSection.questions.length > 0) {
+                                sections.push(currentSection);
+                            }
+
+                            return sections.map((section, sectionIndex) => (
+                                <div
+                                    key={sectionIndex}
+                                    className="viewer-section" // Different class name to avoid conflicts
+                                    style={{
+                                        backgroundColor: section.color,
+                                        padding: section.color !== '#ffffff' ? '24px' : '16px',
+                                        borderRadius: section.color !== '#ffffff' ? '12px' : '0',
+                                        marginBottom: '16px',
+                                        border: section.color !== '#ffffff' ? '1px solid #e5e7eb' : 'none'
+                                    }}
+                                >
+                                    {section.questions.map(question => (
+                                        <div key={question.id} className="viewer-question">
+                                            <QuestionRenderer
+                                                question={question}
+                                                value={responses[question.id]}
+                                                onChange={(value) => handleInputChange(question.id, value)}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            ));
+                        })()}
                     </div>
-                ))}
-            </div>
-        ));
-    })()}
-</div>
+
+
 
                     <div className="form-navigation">
                         {form.pages.length > 1 && currentPageIndex > 0 && (

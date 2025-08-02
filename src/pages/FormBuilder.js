@@ -183,7 +183,7 @@ const FormBuilder = () => {
         const newSectionBreak = {
             id: generateId(),
             type: 'section-break',
-            color: '#DDDDDD'
+            color: '#ffffff'
         };
 
         setForm((prev) => ({
@@ -519,95 +519,132 @@ if (sectionBreaks.length === 0) {
                                 <p className="empty-subtitle">Start adding questions or sections to build your form</p>
                             </div>
                         ) : (
-                            <div className="questions-list">
-                            {sectionsToRender.map((section, sectionIndex) => (
-                                <div 
-                                    key={section.id} 
-                                    className="section-container" 
-                                    style={{ 
-                                        backgroundColor: section.color || '#6bd4c6',
-                                        padding: '24px',
-                                        borderRadius: '12px',
-                                        marginBottom: '16px'
-                                    }}
-                                >
-                                    {/* Section Header Controls */}
-                                    <div className="section-header-controls">
-                                        <span className="section-header-label">Section {sectionIndex + 1}</span>
-                                        <input
-                                            type="color"
-                                            value={section.color || '#6bd4c6'}
-                                            onChange={(e) => updateSection(section.id, { color: e.target.value })}
-                                            className="section-color-picker"
-                                            disabled={isConditionSelectionMode}
-                                        />
-                                    </div>
-                                    
-                                    {/* Questions in this section */}
-                                    {section.elements.map((questionId, questionIndex) => {
-                                        const question = form.questions.find(q => q.id === questionId);
-                                        if (!question) return null;
-                                        
-                                        return (
-                                            <div key={questionId} className="question-in-section">
-                                                {/* Question Header */}
-                                                <div className="question-header">
-                                                    <div className="question-info">
-                                                        <span className="question-number">Q{questionIndex + 1}</span>
+                            <div className="questions-list" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
+                            {currentPageElements.length === 0 ? (
+                                <div className="empty-content">
+                                    <span className="empty-text">No questions on this page</span>
+                                    <p className="empty-subtitle">Start adding questions to build your form</p>
+                                </div>
+                            ) : (
+                                <div className="questions-container">
+                                    {currentPageElements.map((item, index) => {
+                                        if (typeof item === 'string') { 
+                                            // It's a question ID
+                                            const question = form.questions.find(q => q.id === item);
+                                            if (!question) return null;
+                                            
+                                            // Determine section color based on preceding section breaks
+                                            const precedingSectionBreaks = currentPageElements
+                                                .slice(0, index)
+                                                .filter(el => el.type === 'section-break');
+                                            
+                                            const currentSectionColor = precedingSectionBreaks.length > 0 
+                                                ? precedingSectionBreaks[precedingSectionBreaks.length - 1].color || form.design.sectionColor
+                                                : '#ffffff'; // Default to white for first section
+                                            
+                                            return (
+                                                <div 
+                                                    key={item} 
+                                                    className="question-container" // Using your existing class
+                                                    style={{ 
+                                                        backgroundColor: currentSectionColor,
+                                                        padding: currentSectionColor !== '#ffffff' ? '20px' : '20px', // Keep consistent padding
+                                                        borderRadius: '8px',
+                                                        marginBottom: '20px',
+                                                        border: currentSectionColor !== '#ffffff' ? '1px solid rgba(179, 179, 179, 0.2)' : '1px solid rgba(179, 179, 179, 0.2)'
+                                                    }}
+                                                >
+                                                    {/* Question Header - Using your existing structure */}
+                                                    <div className="question-header">
+                                                        <div className="question-info">
+                                                            <span className="question-number">Q{index + 1}</span>
+                                                            <input
+                                                                type="text"
+                                                                value={question.title}
+                                                                onChange={(e) => updateQuestion(question.id, { title: e.target.value })}
+                                                                className="question-title-input"
+                                                                placeholder="Question title"
+                                                                disabled={isConditionSelectionMode}
+                                                            />
+                                                        </div>
+                                                        <div className="question-type-selector">
+                                                            <div className="question-type-display">
+                                                                <svg className="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                    <polyline points="6,9 12,15 18,9" />
+                                                                </svg>
+                                                                <span className="type-label">{getQuestionTypeLabel(question.type)}</span>
+                                                            </div>
+                                                            <select
+                                                                value={question.type}
+                                                                onChange={(e) => updateQuestionType(question.id, e.target.value)}
+                                                                className="type-select"
+                                                                disabled={isConditionSelectionMode}
+                                                            >
+                                                                <option value="text">Short Answer</option>
+                                                                <option value="textarea">Long Answer</option>
+                                                                <option value="multiple-choice">Multiple Choice</option>
+                                                                <option value="checkbox">Checkbox</option>
+                                                                <option value="dropdown">Dropdown</option>
+                                                                <option value="date">Date</option>
+                                                                <option value="linear-scale">Linear Scale</option>
+                                                                <option value="rating">Rating</option>
+                                                                <option value="file-upload">File Upload</option>
+                                                                <option value="image">Image</option>
+                                                                <option value="video">Video</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    {/* Question Answer Area - Using your existing structure */}
+                                                    <div className="question-answer">
+                                                        {renderQuestionAnswerBox(question)}
+                                                    </div>
+                                                </div>
+                                            );
+                                        } else if (item.type === 'section-break') { 
+                                            // It's a section break - show as horizontal divider
+                                            return (
+                                                <div key={item.id} className="section-break-divider">
+                                                    <hr 
+                                                        className="section-separator" 
+                                                        style={{ 
+                                                            borderColor: item.color || form.design.sectionColor,
+                                                            borderWidth: '2px',
+                                                            margin: '24px 0',
+                                                            border: 'none',
+                                                            borderTop: `2px solid ${item.color || form.design.sectionColor}`
+                                                        }}
+                                                    />
+                                                    <div className="section-color-control">
+                                                        <label style={{ fontSize: '12px', color: '#666', marginRight: '12px' }}>
+                                                            Next Section Color:
+                                                        </label>
                                                         <input
-                                                            type="text"
-                                                            value={question.title}
-                                                            onChange={(e) => updateQuestion(question.id, { title: e.target.value })}
-                                                            className="question-title-input"
-                                                            placeholder="Question title"
+                                                            type="color"
+                                                            value={item.color || form.design.sectionColor}
+                                                            onChange={(e) => updateSection(item.id, { color: e.target.value })}
+                                                            className="section-color-picker-inline"
+                                                            style={{
+                                                                width: '24px',
+                                                                height: '24px',
+                                                                border: 'none',
+                                                                borderRadius: '4px',
+                                                                cursor: 'pointer'
+                                                            }}
                                                             disabled={isConditionSelectionMode}
                                                         />
                                                     </div>
-                                                    <div className="question-type-selector">
-                                                        <div className="question-type-display">
-                                                            <svg className="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                                <polyline points="6,9 12,15 18,9" />
-                                                            </svg>
-                                                            <span className="type-label">{getQuestionTypeLabel(question.type)}</span>
-                                                        </div>
-                                                        <select
-                                                            value={question.type}
-                                                            onChange={(e) => updateQuestionType(question.id, e.target.value)}
-                                                            className="type-select"
-                                                            disabled={isConditionSelectionMode}
-                                                        >
-                                                            <option value="text">Short Answer</option>
-                                                            <option value="textarea">Long Answer</option>
-                                                            <option value="multiple-choice">Multiple Choice</option>
-                                                            <option value="checkbox">Checkbox</option>
-                                                            <option value="dropdown">Dropdown</option>
-                                                            <option value="date">Date</option>
-                                                            <option value="linear-scale">Linear Scale</option>
-                                                            <option value="rating">Rating</option>
-                                                            <option value="file-upload">File Upload</option>
-                                                            <option value="image">Image</option>
-                                                            <option value="video">Video</option>
-                                                        </select>
-                                                    </div>
                                                 </div>
-                                                
-                                                {/* Question Answer Area */}
-                                                <div className="question-answer">
-                                                    {renderQuestionAnswerBox(question)}
-                                                </div>
-                                            </div>
-                                        );
+                                            );
+                                        }
+                                        return null;
                                     })}
-                                    
-                                    {/* Show message if section is empty */}
-                                    {section.elements.length === 0 && (
-                                        <div className="empty-section">
-                                            <span>Add questions to this section</span>
-                                        </div>
-                                    )}
                                 </div>
-                            ))}
+                            )}
                         </div>
+                        
+                        
+                        
                         
                         )}
                         {isConditionSelectionMode && (<div className="bottom-add-condition"><button className="bottom-condition-btn" disabled={selectedConditions.length === 0} onClick={handleBottomAddCondition}>Add Condition ({selectedConditions.length} selected)</button></div>)}
